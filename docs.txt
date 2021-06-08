@@ -27,3 +27,4 @@ mongodb-compass
 npm install express --save
 npm install mongoose --save
 npm install cors --save
+sudo npm install -g nodemon

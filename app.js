@@ -12,10 +12,10 @@ db.mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  .then(() => {
+  .then((result) => {
     console.log(`Database Connected!`);
   })
-  .catch(() => {
+  .catch((err) => {
     console.log(`Cannot Connect to the Database!`, err);
     process.exit();
   });
@@ -25,6 +25,8 @@ app.get('/', (req, res) => {
     message: "Welcome to our App"
   });
 });
+
+require('./app/routes/post.routes')(app);
 
 const PORT = 8000;
 app.listen(PORT, () => {

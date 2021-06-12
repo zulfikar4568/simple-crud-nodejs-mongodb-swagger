@@ -26,8 +26,20 @@ exports.create = (req, res) => {
   })
   .catch((error) => {
     res.status(409).send({
-      message: err.message || "Some error while create posts"
+      message: error.message || "Some error while create posts"
     });
   });
-}
+};
 
+exports.findOne = (req, res) => {
+  const id = req.params.id;
+
+  Post.findById(id)
+  .then((result) => {
+     res.send(result);  
+  }).catch((err) => {
+    res.status(409).send({
+      message: err.message || "Error while search using id"   
+    })
+  });
+};

@@ -40,6 +40,28 @@ exports.findOne = (req, res) => {
   }).catch((err) => {
     res.status(409).send({
       message: err.message || "Error while search using id"   
-    })
+    });
   });
 };
+
+exports.update = (req, res) => {
+  const id = req.params.id;
+  
+  Post.findByIdAndUpdate(id, req.body)
+  .then((result) => {
+    if (!result){
+      res.status(404).send({
+        message: "Posts not found"
+      });
+    }
+    else {
+      res.send({
+        message: "Post updated!"
+      });
+    }
+  }).catch((err) => {
+    res.status(409).send({
+      message: err.message || "Error while update"   
+    });
+  });
+}

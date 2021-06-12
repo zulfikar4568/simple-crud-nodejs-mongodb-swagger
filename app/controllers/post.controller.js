@@ -51,7 +51,7 @@ exports.update = (req, res) => {
   .then((result) => {
     if (!result){
       res.status(404).send({
-        message: "Posts not found"
+        message: "Posts not found!"
       });
     }
     else {
@@ -62,6 +62,28 @@ exports.update = (req, res) => {
   }).catch((err) => {
     res.status(409).send({
       message: err.message || "Error while update"   
+    });
+  });
+}
+
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Post.findByIdAndRemove(id)
+  .then((result) => {
+    if (!result){
+      res.status(404).send({
+        message: "Posts not found!"
+      });
+    }
+    else {
+      res.send({
+        message: "Post deleted!"
+      });
+    }
+  }).catch((err) => {
+    res.status(409).send({
+      message: err.message || "Error while delete!"   
     });
   });
 }
